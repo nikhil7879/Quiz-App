@@ -1,24 +1,50 @@
 const questions = [
     {
-        question: "Which is the largest animal in the world?",
+        question: "What color is the sky on Mars?",
         answers: [
-            { text: "Shark", correct: false },
-            { text: "Blue Whale", correct: true },
-            { text: "Lion", correct: false },
-            { text: "Elephant", correct: false },
+            { text: "Blue", correct: false },
+            { text: "Green", correct: false },
+            { text: "Pink", correct: true },
+            { text: "Orange", correct: false },
         ]
     },
     {
-        question: "Which is the tallest animal in the world?",
+        question: "Which animal is known for its distinctive laugh?",
         answers: [
-            { text: "Giraffe", correct: true },
-            { text: "Elephant", correct: false },
             { text: "Lion", correct: false },
-            { text: "Blue Whale", correct: false },
+            { text: "Hyena", correct: true },
+            { text: "Dolphin", correct: false },
+            { text: "Parrot", correct: false },
         ]
     },
+    {
+        question: "In which year did the famous Chicken Cross the Road incident occur?",
+        answers: [
+            { text: "1492", correct: false },
+            { text: "1999", correct: false },
+            { text: "2020", correct: false },
+            { text: "It's a timeless joke", correct: true },
+        ]
+    },
+    {
+        question: "What is a group of unicorns called?",
+        answers: [
+            { text: "Herd", correct: false },
+            { text: "Flock", correct: false },
+            { text: "Blessing", correct: true },
+            { text: "Pack", correct: false },
+        ]
+    },
+    {
+        question: "Which planet is known as the 'laughing planet' due to its moon named Titan?",
+        answers: [
+            { text: "Earth", correct: false },
+            { text: "Jupiter", correct: false },
+            { text: "Saturn", correct: true },
+            { text: "Mars", correct: false },
+        ]
+    }
 ];
-
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
@@ -60,6 +86,15 @@ function resetState() {
 function selectAnswer(e) {
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === "true";
+
+    // Remove 'selected' class from all buttons
+    Array.from(answerButtons.children).forEach(button => {
+        button.classList.remove("selected");
+    });
+
+    // Add 'selected' class to the clicked button
+    selectedBtn.classList.add("selected");
+
     selectedBtn.classList.add(isCorrect ? "correct" : "wrong");
     if (isCorrect) score++;
 
@@ -80,6 +115,7 @@ function handleNextButtonClick() {
     }
 }
 
+
 function showScore() {
     resetState();
     questionElement.textContent = `You scored ${score} out of ${questions.length}!`;
@@ -88,4 +124,5 @@ function showScore() {
     nextButton.addEventListener("click", startQuiz);
     nextButton.style.display = "block";
 }
+
 startQuiz();
